@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - Personel Yönetimi</title>
+    <link rel="stylesheet" href="/css/admin.css" />
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #2c3e50; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f4f4f4; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 10px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; margin-top: 5px; }
+        button { margin-top: 15px; padding: 10px 15px; background-color: #3498db; color: #fff; border: none; cursor: pointer; }
+        button:hover { background-color: #2980b9; }
+        a { color: #3498db; text-decoration: none; margin-right: 10px; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+<h1>Personel Yönetimi</h1>
+
+<!-- Mevcut personel listesini göster -->
+<h2>Mevcut Personel Listesi</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Adı Soyadı</th>
+        <th>Departman</th>
+        <th>İşlemler</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="person : ${personList}">
+        <td th:text="${person.id}"></td>
+        <td th:text="${person.name}"></td>
+        <td th:text="${person.department}"></td>
+        <td>
+            <a th:href="@{/admin/edit/{id}(id=${person.id})}">Düzenle</a>
+            <a th:href="@{/admin/delete/{id}(id=${person.id})}"
+               onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Yeni personel ekleme formu -->
+<h2>Yeni Personel Ekle</h2>
+<form th:action="@{/admin/add}" method="post">
+
+
+
+    <label for="name">Adı Soyadı:</label>
+    <input type="text" id="name" name="name" required autofocus />
+
+    <label for="department">Departman:</label>
+    <input type="text" id="department" name="department" required />
+
+    <button type="submit">Personel Ekle</button>
+</form>
+</body>
+</html>
