@@ -28,20 +28,24 @@
     <thead>
     <tr>
         <th>ID</th>
-        <th>Adı Soyadı</th>
-        <th>Departman</th>
+        <th>Ad Soyad</th>
+        <th>İş Yeri No</th>
+        <th>İzin Gün Sayısı</th>
         <th>İşlemler</th>
+        <th>TC Kimlik No</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="person : ${personList}">
-        <td th:text="${person.id}"></td>
-        <td th:text="${person.name}"></td>
-        <td th:text="${person.department}"></td>
+    <tr th:each="person : ${personellerList}">
+        <td th:text="${personeller.id}">1</td>
+        <td th:text="${personeller.ad} + ' ' + ${personeller.soyad}">John Doe</td>
+        <td th:text="${personeller.is_yeri_no}">123</td>
+        <td th:text="${personeller.izin_gun_sayisi}">10</td>
+        <td th:text="${personeller.tc_kimlik_no}">10</td>
+
         <td>
-            <a th:href="@{/admin/edit/{id}(id=${person.id})}">Düzenle</a>
-            <a th:href="@{/admin/delete/{id}(id=${person.id})}"
-               onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+            <a th:href="@{/admin/edit/{id}(id=${personeller.id})}">Düzenle</a>
+            <a th:href="@{/admin/delete/{id}(id=${personeller.id})}" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
         </td>
     </tr>
     </tbody>
@@ -50,14 +54,20 @@
 <!-- Yeni personel ekleme formu -->
 <h2>Yeni Personel Ekle</h2>
 <form th:action="@{/admin/add}" method="post">
+    <label for="ad">Adı:</label>
+    <input type="text" id="ad" name="ad" required autofocus />
 
+    <label for="soyad">Soyadı:</label>
+    <input type="text" id="soyad" name="soyad" required />
 
+    <label for="is_yeri_no">İş Yeri No:</label>
+    <input type="text" id="is_yeri_no" name="is_yeri_no" required />
 
-    <label for="name">Adı Soyadı:</label>
-    <input type="text" id="name" name="name" required autofocus />
+    <label for="izin_gun_sayisi">İzin Gün Sayısı:</label>
+    <input type="number" id="izin_gun_sayisi" name="izin_gun_sayisi" required />
 
-    <label for="department">Departman:</label>
-    <input type="text" id="department" name="department" required />
+    <label for="tc_kimlik_no">TC Kimlik No:</label>
+    <input type="number" id="tc_kimlik_no" name="izin_gun_sayisi" required />
 
     <button type="submit">Personel Ekle</button>
 </form>
