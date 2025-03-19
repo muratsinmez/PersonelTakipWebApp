@@ -28,3 +28,28 @@ Bu proje, kurum içerisindeki personel bilgilerini yönetmek amacıyla geliştir
    ```bash
    git clone https://github.com/muratsinmez/personel_takip.git
    cd personel_takip
+Veritabanı Ayarlarını Yapın: src/main/resources/application.properties dosyasında veritabanı bağlantı ayarlarını düzenleyin:
+
+spring.datasource.url=jdbc:mysql://localhost:3306/personel_db
+spring.datasource.username=root
+spring.datasource.password=your_password
+spring.jpa.hibernate.ddl-auto=update
+
+Bağımlılıkları Yükleyin:
+mvn clean install
+
+Uygulamayı Başlatın:
+mvn spring-boot:run
+
+Test Edin: Tarayıcınızda http://localhost:8080/login adresine giderek giriş ekranını test edin.
+
+API Endpointleri
+HTTP Yöntemi	Endpoint	Açıklama
+GET	/api/personel	Tüm personel verilerini getirir
+GET	/api/personel/{id}	Belirli bir personeli getirir
+POST	/api/personel	Yeni personel ekler
+PUT	/api/personel/{id}	Mevcut personeli günceller
+DELETE	/api/personel/{id}	Personeli siler
+
+Lisans
+Bu proje MIT Lisansı altında lisanslanmıştır.
